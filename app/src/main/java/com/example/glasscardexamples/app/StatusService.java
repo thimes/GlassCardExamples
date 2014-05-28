@@ -25,9 +25,9 @@ import java.util.TimerTask;
 
 public class StatusService extends Service implements OnInitListener {
 
-    private static final String CHRONOMETER_LIVE_CARD_TAG = "com.thimes.status.tag.StatusCard";
+    private static final String CHRONOMETER_LIVE_CARD_TAG = "com.thimes.status.tag.ChronometerCard";
 
-    private static final String BATTERY_LIVE_CARD_TAG = "com.thimes.status.tag.StatusCard";
+    private static final String BATTERY_LIVE_CARD_TAG = "com.thimes.status.tag.BatteryCard";
 
     @SuppressWarnings("unused")
     private static final String TAG = "StatusService";
@@ -86,7 +86,7 @@ public class StatusService extends Service implements OnInitListener {
                 CharSequence cs = level + "%";
 
                 views.setTextViewText(R.id.battery_state, cs);
-                LiveCard liveCard = new LiveCard(StatusService.this, CHRONOMETER_LIVE_CARD_TAG);
+                LiveCard liveCard = new LiveCard(StatusService.this, BATTERY_LIVE_CARD_TAG);
                 liveCard.setViews(views);
 
                 cards.add(liveCard);
