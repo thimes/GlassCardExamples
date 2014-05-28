@@ -39,31 +39,28 @@ public class MenuActivity extends Activity {
         // Handle item selection.
         switch (item.getItemId()) {
             case R.id.menu_stop:
-                stopService(new Intent(this, StatusService.class));
+                stopService(new Intent(this, ChronoService.class));
+                stopService(new Intent(this, LevelService.class));
+                stopService(new Intent(this, BatteryService.class));
                 return true;
 
-            /* none of this works post XE16, so don't!
-            case R.id.menu_new_static_card:
-                Card staticCard = new Card(this);
-                staticCard.setText(R.string.static_card_title);
-                staticCard.setFootnote(R.string.static_card_footnote);
-                staticCard.setImageLayout(Card.ImageLayout.FULL);
-                staticCard.addImage(R.drawable.catbreading);
+            case R.id.menu_show_level:
+                stopService(new Intent(this, ChronoService.class));
+                startService(new Intent(this, LevelService.class));
+                stopService(new Intent(this, BatteryService.class));
+                return true;
 
-                final long staticId = tm.insert(staticCard);
-            {
-                Timer t = new Timer();
-                TimerTask task = new TimerTask() {
+            case R.id.menu_show_battery:
+                startService(new Intent(this, BatteryService.class));
+                stopService(new Intent(this, ChronoService.class));
+                stopService(new Intent(this, LevelService.class));
+                return true;
 
-                    @Override
-                    public void run() {
-                        tm.delete(staticId);
-                    }
-                };
-
-                t.schedule(task, 15000);
-            }
-            */
+            case R.id.menu_show_chrono:
+                startService(new Intent(this, ChronoService.class));
+                stopService(new Intent(this, LevelService.class));
+                stopService(new Intent(this, BatteryService.class));
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -72,7 +69,7 @@ public class MenuActivity extends Activity {
 
     @Override
     public void onOptionsMenuClosed(Menu menu) {
-        // Nothing else to do, closing the activity.
+        // Nothing else to do, closing the activity, but we MUST call finish so the activity goes away.
         finish();
     }
 

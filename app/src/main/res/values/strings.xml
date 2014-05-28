@@ -1,10 +1,12 @@
 <resources>
 
-    <string name="app_name">Live Card Examples</string>
-    <string name="voice_trigger">Example Cards</string>
+    <string name="app_name">Live Card Samples</string>
+    <string name="voice_trigger">Show Live Cards</string>
     <string name="menu_stop">Stop</string>
     <string name="menu_new_static_card">New Static Card</string>
-    <string name="menu_show_chronometer">Show Chronometer</string>
+    <string name="menu_show_level">Show Level</string>
+    <string name="menu_show_chrono">Show Chronometer</string>
+    <string name="menu_show_battery">Show Battery Level</string>
     <string name="card_list">Card #%d</string>
 
 </resources>
