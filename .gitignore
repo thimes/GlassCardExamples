@@ -1,2 +1,10 @@
-bin
-gen
+.gradle
+.idea/
+*.iml
+/local.properties
+.DS_Store
+app/build
+
+# built application files
+*.apk
+*.ap_

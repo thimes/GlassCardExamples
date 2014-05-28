@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.glasscardexamples.app">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name">
+        <service
+            android:name="com.example.glasscardexamples.app.StatusService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.glass.action.VOICE_TRIGGER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="com.google.android.glass.VoiceTrigger"
+                android:resource="@xml/voice_trigger_start" />
+            <!-- Apparently it NEEDS to have the voice_trigger_start.xml in /res/xml... -->
+        </service>
+
+        <activity android:name=".MenuActivity" />
+
+    </application>
+
+    <uses-permission android:name="com.google.android.glass.permission.DEVELOPMENT"/>
+
+</manifest>
