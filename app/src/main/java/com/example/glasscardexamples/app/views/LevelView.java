@@ -30,7 +30,10 @@ import android.view.View;
 public class LevelView extends View {
 
     private Paint mPaint = new Paint();
-    private float mAngle = 0.f;
+    private float mRollAngle = 0.f;
+    private float mPitchAngle = 0.f;
+    private int mUpColor =   Color.parseColor("#1100ff00");
+    private int mDownColor = Color.parseColor("#11ff0000");
 
     public LevelView(Context context) {
         this(context, null, 0);
@@ -53,14 +56,14 @@ public class LevelView extends View {
      *
      * @param angle Angle of the level line.
      */
-    public void setAngle(float angle) {
-        mAngle = angle;
+    public void setRollAngle(float angle) {
+        mRollAngle = angle;
         // Redraw the line.
         invalidate();
     }
 
-    public float getAngle() {
-        return mAngle;
+    public void setPitchAngle(float angle) {
+        mPitchAngle = angle;
     }
 
     @Override
@@ -69,8 +72,14 @@ public class LevelView extends View {
         int width = canvas.getWidth();
         int height = canvas.getHeight() / 2;
 
+        if (mPitchAngle > 0) {
+            canvas.drawColor(mUpColor);
+        } else {
+            canvas.drawColor(mDownColor);
+        }
+
         // Compute the coordinates.
-        float y = (float) Math.tan(mAngle) * width / 2;
+        float y = (float) Math.tan(mRollAngle) * width / 2;
 
         // Draw the level line.
         canvas.drawLine(0, y + height, width, -y + height, mPaint);

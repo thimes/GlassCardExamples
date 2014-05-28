@@ -80,10 +80,17 @@ public class LevelRenderer implements DirectRenderingCallback {
          * @param event Gravity values.
          */
         private void computeOrientation(SensorEvent event) {
-            float angle = (float) -Math.atan(event.values[0]
-                    / Math.sqrt(event.values[1] * event.values[1] + event.values[2] * event.values[2]));
+            float x = event.values[0];
+            float y = event.values[1];
+            float z = event.values[2];
 
-            mLevelView.setAngle(angle);
+//            -atan(x) / sqrt(y ^ 2 + z ^ 2)
+            float rollAngle = (float) -Math.atan(x / Math.sqrt(y * y + z * z));
+
+            float pitchAngle = (float) -Math.atan(z / Math.sqrt(x * x + y * y));
+
+            mLevelView.setPitchAngle(pitchAngle);
+            mLevelView.setRollAngle(rollAngle);
         }
     };
 
