@@ -66,11 +66,20 @@ public class LevelView extends View {
         mPitchAngle = angle;
     }
 
+    int centerX = 0;
+    int centerY = 0;
+    int width = 0;
+    int height = 0;
+
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        int width = canvas.getWidth();
-        int height = canvas.getHeight() / 2;
+
+        width = canvas.getWidth();
+        height = canvas.getHeight();
+
+        centerX = width / 2;
+        centerY = height / 2;
 
         if (mPitchAngle > 0) {
             canvas.drawColor(mUpColor);
@@ -82,7 +91,7 @@ public class LevelView extends View {
         float y = (float) Math.tan(mRollAngle) * width / 2;
 
         // Draw the level line.
-        canvas.drawLine(0, y + height, width, -y + height, mPaint);
+        canvas.drawLine(0, y + centerY, width, -y + centerY, mPaint);
     }
 
 }

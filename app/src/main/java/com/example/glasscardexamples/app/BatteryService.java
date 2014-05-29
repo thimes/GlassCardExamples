@@ -1,5 +1,6 @@
 package com.example.glasscardexamples.app;
 
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -69,14 +70,18 @@ public class BatteryService extends Service implements OnInitListener {
                 CharSequence cs = level + "%";
 
                 views.setTextViewText(R.id.battery_state, cs);
-                LiveCard liveCard = new LiveCard(BatteryService.this, BATTERY_LIVE_CARD_TAG);
-                liveCard.setViews(views);
-
-                mLiveCard = liveCard;
+                mLiveCard = new LiveCard(BatteryService.this, BATTERY_LIVE_CARD_TAG);
+                mLiveCard.setViews(views);
 
                 sayLevel(level);
 
-                liveCard.publish(LiveCard.PublishMode.REVEAL);
+                // Display the options menu when the live card is tapped.
+                Intent menuIntent = new Intent(this, MenuActivity.class);
+                menuIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                mLiveCard.setAction(PendingIntent.getActivity(this, 0, menuIntent, 0));
+                // Display the options menu when the live card is tapped.
+
+                mLiveCard.publish(LiveCard.PublishMode.REVEAL);
                 unregisterReceiver(mBatteryInfoReceiver);
 
                 Timer t = new Timer();
